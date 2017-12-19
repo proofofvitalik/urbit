@@ -2075,7 +2075,7 @@ u3_raft_chip(void)
   _raft_crop();
   ovo = _raft_prod();
   if ( u3_nul != ovo ) {
-    _raft_pump(u3h(ovo), u3t(ovo));
+    _raft_pump(u3t(ovo), u3h(ovo));
   }
 }
 
