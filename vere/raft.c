@@ -1986,6 +1986,40 @@ _raft_poke(void)
 }
 
 
+/* _raft_prod(): Peel one ovum off u3A->roe and poke Arvo with it.
+*/
+static u3_weak
+_raft_prod(void)
+{
+  u3_noun ova, ovo;
+  u3_weak ret;
+
+  if ( 0 == u3Z->lug_u.len_d ) {
+    return u3_nul; //  XX  Why?
+  }
+  ova = u3kb_flop(u3A->roe);
+  if ( u3_nul == ova ) {
+    return u3_nul;
+  }
+  ovo = u3k(u3h(ova));
+  u3A->roe = u3qb_flop(u3t(ova));
+  u3z(ova);
+
+  if ( u3_nul != ovo ) {
+    u3_term_ef_blit(0, u3nc(u3nc(c3__bee, u3k(ovo)), u3_nul));
+  }
+
+  ret = _raft_punk(u3k(u3t(ovo)));
+  c3_assert(u3_nul == u3h(ovo));
+  u3z(ovo);
+
+  if ( u3_nul != ovo ) {
+    u3_term_ef_blit(0, u3nc(u3nc(c3__bee, u3_nul), u3_nul));
+  }
+  return ret;
+}
+
+
 /* _raft_pump(): Cartify, jam, and save an ovum, then perform its effects.
 */
 static void
@@ -2031,7 +2065,22 @@ _raft_pump(ovo, vir)
 }
 
 
-/* u3_raft_work(): work.
+/* u3_raft_chip(): chip one event off for processing.
+*/
+void
+u3_raft_chip(void)
+{
+  u3_noun ovo;
+
+  _raft_crop();
+  ovo = _raft_prod();
+  if ( u3_nul != ovo ) {
+    _raft_pump(u3h(ovo), u3t(ovo));
+  }
+}
+
+
+/* u3_raft_work(): work, either synchronously or asynchronously.
 */
 void
 u3_raft_work(void)
@@ -2045,37 +2094,12 @@ u3_raft_work(void)
     }
   }
   else {
-    //  Delete finished events.
-    //
-    _raft_crop();
-
-    //  Poke pending events, leaving the poked events and errors on u3A->roe.
-    //
-    _raft_poke();
 
     //  Cartify, jam, and encrypt this batch of events. Take a number, Raft will
     //  be with you shortly.
-    {
-      u3_noun ova;
-      u3_noun ovo;
-      u3_noun vir;
-      u3_noun nex;
-
-      ova = u3kb_flop(u3A->roe);
-      u3A->roe = u3_nul;
-
-      while ( u3_nul != ova ) {
-        ovo = u3k(u3t(u3h(ova)));
-        vir = u3k(u3h(u3h(ova)));
-        nex = u3k(u3t(ova));
-        u3z(ova); ova = nex;
-
-        if ( u3_nul != ovo ) {
-          _raft_pump(ovo, vir);
-
-          _raft_grab(ova);
-        }
-      }
+    while ( u3_nul != u3A->roe ) {
+      u3_raft_chip();
+      //  XX do we still need  _raft_grab(ova);
     }
   }
 }
