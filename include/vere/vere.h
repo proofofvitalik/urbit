@@ -1069,7 +1069,7 @@
       /* u3_raft_work(): poke, kick, and push pending events.
       */
         void
-        u3_raft_work(void);
+        u3_raft_work(c3_o);
 
 
     /**  Disk persistence.

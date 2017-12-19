@@ -590,7 +590,7 @@ _sist_zest()
   }
 
   //  Work through the boot events.
-  u3_raft_work();
+  u3_raft_work(c3y);
 }
 
 /* _sist_make(): boot from scratch.

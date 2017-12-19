@@ -446,7 +446,7 @@ u3_lo_shut(c3_o inn)
 
   //  process actions
   //
-  u3_raft_work();
+  u3_raft_work(c3n);
 
   // u3_lo_grab("lo_shut b", u3_none);
 
@@ -461,7 +461,7 @@ u3_lo_shut(c3_o inn)
   //
   if ( c3y == inn ) {
     u3_unix_ef_look(c3n);
-    u3_raft_work();
+    u3_raft_work(c3n);
     _lo_time();
   }
 
@@ -472,6 +472,7 @@ u3_lo_shut(c3_o inn)
   if ( c3n == u3_Host.liv ) {
     //  direct save and die
     //
+    u3_raft_work(c3y);
     // u3_lo_grab("lo_exit", u3_none);
     // u3_loom_save(u3A->ent_d);
     // u3_loom_exit();

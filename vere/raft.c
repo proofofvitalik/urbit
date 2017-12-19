@@ -2079,11 +2079,17 @@ u3_raft_chip(void)
   }
 }
 
+/* _raft_work_cb(): callback to recurse into u3_raft_work().
+*/
+void _raft_work_cb(uv_timer_t* tim_u)
+{
+  u3_raft_work(c3n);
+}
 
 /* u3_raft_work(): work, either synchronously or asynchronously.
 */
 void
-u3_raft_work(void)
+u3_raft_work(c3_o syn)
 {
   if ( u3Z->typ_e != u3_raty_lead ) {
     c3_assert(u3A->ova.egg_p == 0);
@@ -2093,13 +2099,19 @@ u3_raft_work(void)
       u3A->roe = u3_nul;
     }
   }
-  else {
-
+  else if ( c3y == syn ) {
     //  Cartify, jam, and encrypt this batch of events. Take a number, Raft will
     //  be with you shortly.
     while ( u3_nul != u3A->roe ) {
       u3_raft_chip();
       //  XX do we still need  _raft_grab(ova);
+    }
+  }
+  else {
+    u3_raft_chip();
+
+    if ( u3_nul != u3A->roe ) {
+      uv_timer_start(&u3Z->tim_u, _raft_work_cb, 0, 0);
     }
   }
 }
