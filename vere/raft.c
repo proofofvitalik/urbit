@@ -1949,43 +1949,6 @@ _raft_crop(void)
 }
 
 
-/* _raft_poke(): Poke pending events, leaving the poked events
- * and errors on u3A->roe.
-*/
-static void
-_raft_poke(void)
-{
-  u3_noun ova, nex;
-
-  if ( 0 == u3Z->lug_u.len_d ) {
-    return;
-  }
-  ova = u3kb_flop(u3A->roe);
-  u3A->roe = u3_nul;
-
-  u3_noun hed = (u3_nul == ova) ? u3_nul : u3h(ova);
-
-  if ( u3_nul != hed ) {
-    u3_term_ef_blit(0, u3nc(u3nc(c3__bee, u3k(hed)), u3_nul));
-  }
-
-  while ( u3_nul != ova ) {
-    u3_noun sur = _raft_punk(u3k(u3t(u3h(ova))));
-    if ( u3_nul != sur) {
-      u3A->roe = u3nc(sur, u3A->roe);
-    }
-    c3_assert(u3_nul == u3h(u3h(ova)));
-
-    nex = u3k(u3t(ova));
-    u3z(ova); ova = nex;
-  }
-
-  if ( u3_nul != hed ) {
-    u3_term_ef_blit(0, u3nc(u3nc(c3__bee, u3_nul), u3_nul));
-  }
-}
-
-
 /* _raft_prod(): Peel one ovum off u3A->roe and poke Arvo with it.
 */
 static u3_weak
