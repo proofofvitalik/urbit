@@ -49,14 +49,19 @@ _term_msc_out_host()
   return 1000000ULL * tim_tv.tv_sec + tim_tv.tv_usec;
 }
 
+/* _term_alloc(): libuv buffer allocator.
+*/
 static void
 _term_alloc(uv_handle_t* had_u,
             size_t len_i,
             uv_buf_t* buf
             )
 {
-  void* ptr_v = c3_malloc(len_i);
-  *buf = uv_buf_init(ptr_v, len_i);
+  // len_i is always 64k, so we're ignoring it
+  // this is usually a single byte read,
+  // more if input is typed quickly or pasted
+  void* ptr_v = c3_malloc(64);
+  *buf = uv_buf_init(ptr_v, 64);
 }
 
 
