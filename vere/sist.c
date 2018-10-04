@@ -602,9 +602,6 @@ _sist_zest()
 static void
 _sist_make(u3_noun fav)
 {
-  //  Initialize ames
-  u3_ames_ef_bake();
-
   //  Authenticate and initialize terminal.
   //
   u3_term_ef_bake(fav);

@@ -667,6 +667,7 @@ u3_lo_lead(void)
   //  Further server configuration.
   //
   {
+    u3_ames_ef_bake();
     u3_http_ef_bake();
   }
 
