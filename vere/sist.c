@@ -1396,7 +1396,7 @@ u3_sist_boot(void)
         des = u3i_string(u3_Host.ops_u.gen_c);
       }
       else {
-        // XX print nice error
+        fprintf(stderr, "comets (temporarily) unsupported\r\n");
         u3_lo_bail();
       }
 
