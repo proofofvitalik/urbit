@@ -1458,11 +1458,17 @@ _sist_dawn(u3_noun sed)
         fprintf(stderr, "boot: retrieving network domains\r\n");
 
         // (list turf): ames domains
-        u3_noun oct = u3do("turf:give:dawn", u3k(bok));
-        u3_noun fut = _sist_eth_rpc(url_c, u3k(oct));
-        tuf = u3do("turf:take:dawn", u3k(fut));
+        // u3_noun oct = u3do("turf:give:dawn", u3k(bok));
+        // u3_noun fut = _sist_eth_rpc(url_c, u3k(oct));
+        // tuf = u3do("turf:take:dawn", u3k(fut));
 
-        u3z(oct); u3z(fut);
+        // u3z(oct); u3z(fut);
+
+        tuf = u3nc(u3nq(u3i_string("org"),
+                    u3i_string("urbit"),
+                    u3i_string("eth"),
+                    u3_nul),
+               u3_nul);
       }
     }
   }
